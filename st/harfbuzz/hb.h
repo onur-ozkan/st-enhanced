@@ -1,5 +1,5 @@
 #include <X11/Xft/Xft.h>
-#include <harfbuzz.h>
+#include <hb.h>
 #include <hb-ft.h>
 
 void hbunloadfonts();
