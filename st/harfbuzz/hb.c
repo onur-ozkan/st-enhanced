@@ -10,7 +10,8 @@
 void hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoints, int start, int length);
 hb_font_t *hbfindfont(XftFont *match);
 
-typedef struct {
+typedef struct
+{
 	XftFont *match;
 	hb_font_t *font;
 } HbFontMatch;
@@ -18,15 +19,16 @@ typedef struct {
 static int hbfontslen = 0;
 static HbFontMatch *hbfontcache = NULL;
 
-void
-hbunloadfonts()
+void hbunloadfonts()
 {
-	for (int i = 0; i < hbfontslen; i++) {
+	for (int i = 0; i < hbfontslen; i++)
+	{
 		hb_font_destroy(hbfontcache[i].font);
 		XftUnlockFace(hbfontcache[i].match);
 	}
 
-	if (hbfontcache != NULL) {
+	if (hbfontcache != NULL)
+	{
 		free(hbfontcache);
 		hbfontcache = NULL;
 	}
@@ -36,7 +38,8 @@ hbunloadfonts()
 hb_font_t *
 hbfindfont(XftFont *match)
 {
-	for (int i = 0; i < hbfontslen; i++) {
+	for (int i = 0; i < hbfontslen; i++)
+	{
 		if (hbfontcache[i].match == match)
 			return hbfontcache[i].font;
 	}
@@ -55,26 +58,30 @@ hbfindfont(XftFont *match)
 	return font;
 }
 
-void
-hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x, int y)
+void hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x, int y)
 {
 	int start = 0, length = 1, gstart = 0;
 	hb_codepoint_t *codepoints = calloc(len, sizeof(hb_codepoint_t));
 
-	for (int idx = 1, specidx = 1; idx < len; idx++) {
-		if (glyphs[idx].mode & ATTR_WDUMMY) {
+	for (int idx = 1, specidx = 1; idx < len; idx++)
+	{
+		if (glyphs[idx].mode & ATTR_WDUMMY)
+		{
 			length += 1;
 			continue;
 		}
 
-		if (specs[specidx].font != specs[start].font || ATTRCMP(glyphs[gstart], glyphs[idx]) || selected(x + idx, y) != selected(x + gstart, y)) {
+		if (specs[specidx].font != specs[start].font || ATTRCMP(glyphs[gstart], glyphs[idx]) || selected(x + idx, y) != selected(x + gstart, y))
+		{
 			hbtransformsegment(specs[start].font, glyphs, codepoints, gstart, length);
 
 			/* Reset the sequence. */
 			length = 1;
 			start = specidx;
 			gstart = idx;
-		} else {
+		}
+		else
+		{
 			length += 1;
 		}
 
@@ -85,10 +92,12 @@ hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x, int
 	hbtransformsegment(specs[start].font, glyphs, codepoints, gstart, length);
 
 	/* Apply the transformation to glyph specs. */
-	for (int i = 0, specidx = 0; i < len; i++) {
+	for (int i = 0, specidx = 0; i < len; i++)
+	{
 		if (glyphs[i].mode & ATTR_WDUMMY)
 			continue;
-		if (glyphs[i].mode & ATTR_BOXDRAW) {
+		if (glyphs[i].mode & ATTR_BOXDRAW)
+		{
 			specidx++;
 			continue;
 		}
@@ -102,8 +111,7 @@ hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x, int
 	free(codepoints);
 }
 
-void
-hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoints, int start, int length)
+void hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoints, int start, int length)
 {
 	hb_font_t *font = hbfindfont(xfont);
 	if (font == NULL)
@@ -115,7 +123,8 @@ hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoin
 	hb_buffer_set_direction(buffer, HB_DIRECTION_LTR);
 
 	/* Fill buffer with codepoints. */
-	for (int i = start; i < (start+length); i++) {
+	for (int i = start; i < (start + length); i++)
+	{
 		rune = string[i].u;
 		mode = string[i].mode;
 		if (mode & ATTR_WDUMMY)
@@ -130,9 +139,10 @@ hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoin
 	hb_glyph_info_t *info = hb_buffer_get_glyph_infos(buffer, NULL);
 
 	/* Write new codepoints. */
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < length; i++)
+	{
 		hb_codepoint_t gid = info[i].codepoint;
-		codepoints[start+i] = gid;
+		codepoints[start + i] = gid;
 	}
 
 	/* Cleanup. */
