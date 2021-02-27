@@ -15,14 +15,19 @@ options:
 	@echo "LDFLAGS = $(STLDFLAGS)"
 	@echo "CC      = $(CC)"
 
-config.h:
-	cp config.def.h config.h
+font:
+	wget https://raw.githubusercontent.com/IBM/plex/master/IBM-Plex-Mono/fonts/complete/ttf/IBMPlexMono-Medium.ttf
+	sudo mkdir -p /usr/share/fonts/ibm-plex
+	sudo cp -f IBMPlexMono-Medium.ttf /usr/share/fonts/ibm-plex/
+	rm IBMPlexMono-Medium.ttf
 
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
 
 st.o: config.h st.h win.h
 x.o: arg.h config.h st.h win.h
+hb.o: st.h
+boxdraw.o: config.h st.h boxdraw_data.h
 
 $(OBJ): config.h config.mk
 
@@ -35,12 +40,12 @@ clean:
 dist: clean
 	mkdir -p st-$(VERSION)
 	cp -R FAQ LEGACY TODO LICENSE Makefile README config.mk\
-		config.def.h st.info st.1 arg.h st.h win.h $(SRC)\
+		config.h st.info st.1 arg.h st.h win.h $(SRC)\
 		st-$(VERSION)
 	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
 	rm -rf st-$(VERSION)
 
-install: st
+install: font st
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f st $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/st
