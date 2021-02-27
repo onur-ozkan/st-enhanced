@@ -4,7 +4,7 @@
 
 include config.mk
 
-SRC = st.c x.c
+SRC = st.c x.c boxdraw/boxdraw.c harfbuzz/hb.c
 OBJ = $(SRC:.c=.o)
 
 all: options st
@@ -16,26 +16,26 @@ options:
 	@echo "CC      = $(CC)"
 
 font:
-	wget https://raw.githubusercontent.com/IBM/plex/master/IBM-Plex-Mono/fonts/complete/ttf/IBMPlexMono-Medium.ttf
-	sudo mkdir -p /usr/share/fonts/ibm-plex
-	sudo cp -f IBMPlexMono-Medium.ttf /usr/share/fonts/ibm-plex/
-	rm IBMPlexMono-Medium.ttf
+	mkdir -p /usr/share/fonts/ibm-plex
+	cp -f IBMPlexMono-Medium.ttf /usr/share/fonts/ibm-plex/
 
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
 
 st.o: config.h st.h win.h
-x.o: arg.h config.h st.h win.h
+x.o: arg.h config.h st.h win.h harfbuzz/hb.h
 hb.o: st.h
-boxdraw.o: config.h st.h boxdraw_data.h
+boxdraw.o: config.h st.h boxdraw/boxdraw_data.h
 
 $(OBJ): config.h config.mk
 
 st: $(OBJ)
+	mv hb.o harfbuzz/hb.o
+	mv boxdraw.o boxdraw/boxdraw.o
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 clean:
-	rm -f st $(OBJ) st-$(VERSION).tar.gz
+	rm -f st $(OBJ) st-$(VERSION).tar.gz *.rej *.orig *.o
 
 dist: clean
 	mkdir -p st-$(VERSION)
@@ -48,7 +48,13 @@ dist: clean
 install: font st
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f st $(DESTDIR)$(PREFIX)/bin
+	cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
+	cp -f st-urlhandler $(DESTDIR)$(PREFIX)/bin
+	cp -f .Stdefaults ~/.Stdefaults
+	xrdb -merge ~/.Stdefaults
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/st
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-urlhandler
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
 	sed "s/VERSION/$(VERSION)/g" < st.1 > $(DESTDIR)$(MANPREFIX)/man1/st.1
 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.1
@@ -57,6 +63,9 @@ install: font st
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
+	rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
+	rm -f $(DESTDIR)$(PREFIX)/bin/st-urlhandler
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
+	rm -f /usr/share/fonts/ibm-plex/IBMPlexMono-Medium.ttf
 
 .PHONY: all options clean dist install uninstall
