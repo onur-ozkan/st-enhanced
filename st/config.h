@@ -95,7 +95,7 @@ unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	"#202020", /* hard contrast: #1d2021 / soft contrast: #32302f */
+	"#202020",
 	"#cc241d",
 	"#98971a",
 	"#d79921",
@@ -112,11 +112,10 @@ static const char *colorname[] = {
 	"#8ec07c",
 	"#ebdbb2",
 	[255] = 0,
-	/* more colors can be added after 255 to use with DefaultXX */
 	"#f5f5f5", /* 256 -> cursor */
 	"#555555", /* 257 -> rev cursor*/
 	"#181818", /* 258 -> bg */
-	"#ebdbb2", /* 259 -> fg */
+	"#f5f5f5", /* 259 -> fg */
 };
 
 
