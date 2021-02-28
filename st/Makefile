@@ -17,7 +17,7 @@ options:
 
 font:
 	mkdir -p /usr/share/fonts/ibm-plex
-	cp -f IBMPlexMono-Medium.ttf /usr/share/fonts/ibm-plex/
+	sudo cp -f IBMPlexMono-Medium.ttf /usr/share/fonts/ibm-plex/
 
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
@@ -35,7 +35,7 @@ st: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 config-files:
-	cp ./config/.Stdefaults /
+	sudo cp ./config/.Stdefaults ~
 
 clean:
 	rm -f st $(OBJ) st-$(VERSION).tar.gz *.rej *.orig *.o
@@ -50,24 +50,24 @@ dist: clean
 
 install: font st config-files
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f st $(DESTDIR)$(PREFIX)/bin
-	cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
-	cp -f st-urlhandler $(DESTDIR)$(PREFIX)/bin
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/st
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-urlhandler
+	sudo cp -f st $(DESTDIR)$(PREFIX)/bin
+	sudo cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
+	sudo cp -f st-urlhandler $(DESTDIR)$(PREFIX)/bin
+	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st
+	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
+	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st-urlhandler
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
-	sed "s/VERSION/$(VERSION)/g" < st.shortcuts > $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
-	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
+	sudo sh -c "sed "s/VERSION/$(VERSION)/g" < st.shortcuts > $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts"
+	sudo chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
 	tic -sx st.info
 	@echo Please see the README file regarding the terminfo entry of st.
 
 uninstall:
-	rm -f $(DESTDIR)$(PREFIX)/bin/st
-	rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
-	rm -f $(DESTDIR)$(PREFIX)/bin/st-urlhandler
-	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
-	rm -f /usr/share/fonts/ibm-plex/IBMPlexMono-Medium.ttf
-	rm -f ~/.Stdefaults
+	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st
+	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
+	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st-urlhandler
+	sudo rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
+	sudo rm -f /usr/share/fonts/ibm-plex/IBMPlexMono-Medium.ttf
+	sudo rm -f ~/.Stdefaults
 
 .PHONY: all options clean dist install uninstall
