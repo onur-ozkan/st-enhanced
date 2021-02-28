@@ -1066,11 +1066,11 @@ void xloadfonts(char *fontstr, double fontsize)
 		else
 		{
 			/*
-			 * Default font size is 12, if none given. This is to
+			 * Default font size is 14, if none given. This is to
 			 * have a known usedfontsize value.
 			 */
-			FcPatternAddDouble(pattern, FC_PIXEL_SIZE, 11);
-			usedfontsize = 11;
+			FcPatternAddDouble(pattern, FC_PIXEL_SIZE, 14);
+			usedfontsize = 14;
 		}
 		defaultfontsize = usedfontsize;
 	}

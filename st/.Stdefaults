@@ -1,5 +1,5 @@
 st.alpha: 1
-st.font: IBM Plex Mono Medium-11;
+st.font: IBM Plex Mono Medium:pixelsize=14:antialias=true:autohint=true;
 
 ! st.termname: st-256color
 ! st.borderpx: 2
