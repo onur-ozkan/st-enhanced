@@ -22,7 +22,7 @@ char *argv0;
 #include "win.h"
 #include "harfbuzz/hb.h"
 
-/* types used in config.h */
+/* types used in config/config.h */
 typedef struct
 {
 	uint mod;
@@ -70,7 +70,7 @@ typedef struct
 #define XK_NO_MOD 0
 #define XK_SWITCH_MOD (1 << 13)
 
-/* function definitions used in config.h */
+/* function definitions used in config/config.h */
 static void clipcopy(const Arg *);
 static void clippaste(const Arg *);
 static void numlock(const Arg *);
@@ -81,8 +81,8 @@ static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
 
-/* config.h for applying patches and the configuration. */
-#include "config.h"
+/* config/config.h for applying patches and the configuration. */
+#include "config/config.h"
 
 /* XEMBED messages */
 #define XEMBED_FOCUS_IN 4
@@ -1972,7 +1972,7 @@ void kpress(XEvent *ev)
 		}
 	}
 
-	/* 2. custom keys from config.h */
+	/* 2. custom keys from config/config.h */
 	if ((customkey = kmap(ksym, e->state)))
 	{
 		ttywrite(customkey, strlen(customkey), 1);

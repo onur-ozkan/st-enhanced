@@ -2,7 +2,7 @@
 # See LICENSE file for copyright and license details.
 .POSIX:
 
-include config.mk
+include config/config.mk
 
 SRC = st.c x.c boxdraw/boxdraw.c harfbuzz/hb.c
 OBJ = $(SRC:.c=.o)
@@ -22,36 +22,37 @@ font:
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
 
-st.o: config.h st.h win.h
-x.o: arg.h config.h st.h win.h harfbuzz/hb.h
+st.o: config/config.h st.h win.h
+x.o: arg.h config/config.h st.h win.h harfbuzz/hb.h
 hb.o: st.h
-boxdraw.o: config.h st.h boxdraw/boxdraw_data.h
+boxdraw.o: config/config.h st.h boxdraw/boxdraw_data.h
 
-$(OBJ): config.h config.mk
+$(OBJ): config/config.h config/config.mk
 
 st: $(OBJ)
 	mv hb.o harfbuzz/hb.o
 	mv boxdraw.o boxdraw/boxdraw.o
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
+config-files:
+	cp ./config/.Stdefaults /
+
 clean:
 	rm -f st $(OBJ) st-$(VERSION).tar.gz *.rej *.orig *.o
 
 dist: clean
 	mkdir -p st-$(VERSION)
-	cp -R FAQ LEGACY TODO LICENSE Makefile README config.mk\
-		config.h st.info st.shortcuts arg.h st.h win.h $(SRC)\
+	cp -R FAQ LEGACY TODO LICENSE Makefile README config/config.mk\
+		config/config.h st.info st.shortcuts arg.h st.h win.h $(SRC)\
 		st-$(VERSION)
 	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
 	rm -rf st-$(VERSION)
 
-install: font st
+install: font st config-files
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f st $(DESTDIR)$(PREFIX)/bin
 	cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
 	cp -f st-urlhandler $(DESTDIR)$(PREFIX)/bin
-	cp -f .Stdefaults ~/.Stdefaults
-	xrdb -merge ~/.Stdefaults
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/st
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-urlhandler
@@ -67,5 +68,6 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st-urlhandler
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
 	rm -f /usr/share/fonts/ibm-plex/IBMPlexMono-Medium.ttf
+	rm -f ~/.Stdefaults
 
 .PHONY: all options clean dist install uninstall

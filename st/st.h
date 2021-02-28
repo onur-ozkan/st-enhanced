@@ -130,7 +130,7 @@ void boxdraw_xinit(Display *, Colormap, XftDraw *, Visual *);
 void drawboxes(int, int, int, int, XftColor *, XftColor *, const XftGlyphFontSpec *, int);
 #endif
 
-/* config.h globals */
+/* config/config.h globals */
 extern char *utmp;
 extern char *scroll;
 extern char *stty_args;
