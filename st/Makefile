@@ -60,7 +60,7 @@ install: font st config-files desktop-icon
 	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st
 	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
 	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st-urlhandler
-	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
+	sudo mkdir -p $(DESTDIR)$(MANPREFIX)/man1
 	sudo sh -c "sed "s/VERSION/$(VERSION)/g" < st.shortcuts > $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts"
 	sudo chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
 	tic -sx st.info
