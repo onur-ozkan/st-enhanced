@@ -16,7 +16,7 @@ options:
 	@echo "CC      = $(CC)"
 
 font:
-	mkdir -p /usr/share/fonts/ibm-plex
+	sudo mkdir -p /usr/share/fonts/ibm-plex
 	sudo cp -f IBMPlexMono-Medium.ttf /usr/share/fonts/ibm-plex/
 
 .c.o:
