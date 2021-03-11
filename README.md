@@ -34,12 +34,12 @@ In order to make your own configurations, edit the ~/.Stdefaults file and then e
 Shortcuts
 ------------
 Besides the default shortcuts, you will have the followings also:
-- alt + s = increase transparency
-- alt + a = decrease transparency
-- alt + shift + up-arrow = zoom in
-- alt + shift + down-arrow = zoom out
-- alt + c = copy selected text
-- alt + v = paste copied text
+- `alt + s` = **increase transparency**
+- `alt + a` = **decrease transparency**
+- `alt + shift + up-arrow` = **zoom in**
+- `alt + shift + down-arrow` = **zoom out**
+- `alt + c` = **copy selected text**
+- `alt + v` = **paste copied text**
 
 
 Uninstallation
