@@ -2,7 +2,7 @@
 
 st-enchanted - simple terminal enchanted
 --------------------
-st-enchanted is a customized version of st that designed for tmux and vim
+st-enchanted is a customized version of st that makes using tmux and vim much better
 
 
 Requirements
