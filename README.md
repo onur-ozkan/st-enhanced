@@ -14,7 +14,7 @@ Patches
 ------------
 - alpha
 - boxdraw
-- harfbuzz
+- ligatures
     
 
 Installation
@@ -29,6 +29,17 @@ Customization
 In order to make your own configurations, edit the ~/.Stdefaults file and then enter the following command (reboot st after the command):
 
     xrdb -merge ~/.Stdefaults
+
+
+Shortcuts
+------------
+Besides the default shortcuts, you will have the followings also:
+- alt + s = increase transparency
+- alt + a = decrease transparency
+- alt + shift + up-arrow = zoom in
+- alt + shift + down-arrow = zoom out
+- alt + c = copy selected text
+- alt + v = paste copied text
 
 
 Uninstallation
