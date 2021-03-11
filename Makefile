@@ -56,10 +56,8 @@ install: font st config-files desktop-icon
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	sudo cp -f st $(DESTDIR)$(PREFIX)/bin
 	sudo cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
-	sudo cp -f st-urlhandler $(DESTDIR)$(PREFIX)/bin
 	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st
 	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
-	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st-urlhandler
 	sudo mkdir -p $(DESTDIR)$(MANPREFIX)/man1
 	sudo sh -c "sed "s/VERSION/$(VERSION)/g" < st.shortcuts > $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts"
 	sudo chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
@@ -69,7 +67,6 @@ install: font st config-files desktop-icon
 uninstall:
 	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st
 	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
-	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st-urlhandler
 	sudo rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
 	sudo rm -f /usr/share/fonts/ibm-plex/IBMPlexMono-Medium.ttf
 	sudo rm -f /usr/share/applications/st.desktop
