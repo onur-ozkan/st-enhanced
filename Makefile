@@ -16,8 +16,8 @@ options:
 	@echo "CC      = $(CC)"
 
 font:
-	sudo mkdir -p /usr/share/fonts/ibm-plex
-	sudo cp -f IBMPlexMono-Medium.ttf /usr/share/fonts/ibm-plex/
+	sudo mkdir -p /usr/share/fonts/hack-nerd
+	sudo cp -f hack-nerd-font.ttf /usr/share/fonts/hack-nerd/
 
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
@@ -68,7 +68,7 @@ uninstall:
 	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st
 	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
 	sudo rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
-	sudo rm -f /usr/share/fonts/ibm-plex/IBMPlexMono-Medium.ttf
+	sudo rm -f /usr/share/fonts/hack-nerd/hack-nerd-font.ttf
 	sudo rm -f /usr/share/applications/st.desktop
 	sudo rm -f ~/.Stdefaults
 	sudo rm -f /usr/share/icons/default/st.svg

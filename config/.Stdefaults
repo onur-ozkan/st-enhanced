@@ -1,5 +1,5 @@
 st.alpha: 1
-st.font: IBM Plex Mono Medium:pixelsize=14:antialias=true:autohint=true;
+st.font: Hack Nerd Font:size=11.5:antialias=true:autohint=true;
 
 ! st.termname: st-256color
 ! st.borderpx: 2

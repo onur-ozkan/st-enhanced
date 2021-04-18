@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "IBM Plex Mono Medium:pixelsize=14:antialias=true:autohint=true";
+static char *font = "Hack Nerd Font:size=11.5:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
