@@ -1,8 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Type=Application
-Terminal=false
-Exec=/usr/local/bin/st
-Name=st
-Comment=st
-Icon=/usr/share/icons/default/st.svg

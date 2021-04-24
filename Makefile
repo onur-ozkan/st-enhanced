@@ -37,10 +37,6 @@ st: $(OBJ)
 config-files:
 	sudo cp ./config/.Stdefaults ~
 
-desktop-icon:
-	sudo cp -f icon.svg /usr/share/icons/default/st.svg
-	sudo cp -f st.desktop /usr/share/applications
-
 clean:
 	rm -f st $(OBJ) st-$(VERSION).tar.gz *.rej *.orig *.o
 
@@ -52,7 +48,7 @@ dist: clean
 	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
 	rm -rf st-$(VERSION)
 
-install: font st config-files desktop-icon
+install: font st config-files
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	sudo cp -f st $(DESTDIR)$(PREFIX)/bin
 	sudo cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
@@ -69,7 +65,6 @@ uninstall:
 	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
 	sudo rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
 	sudo rm -f /usr/share/fonts/hack-nerd/hack-nerd-font.ttf
-	sudo rm -f /usr/share/applications/st.desktop
 	sudo rm -f ~/.Stdefaults
 	sudo rm -f /usr/share/icons/default/st.svg
 
