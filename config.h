@@ -14,7 +14,7 @@ static int borderpx = 0;
  * 2: scroll and/or utmp
  * 3: SHELL environment variable
  * 4: value of shell in /etc/passwd
- * 5: value of shell in config/config.h
+ * 5: value of shell in config.h
  */
 static char *shell = "/bin/sh";
 char *utmp = NULL;

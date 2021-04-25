@@ -2,7 +2,7 @@
 # See LICENSE file for copyright and license details.
 .POSIX:
 
-include config/config.mk
+include config.mk
 
 SRC = st.c x.c boxdraw/boxdraw.c harfbuzz/hb.c
 OBJ = $(SRC:.c=.o)
@@ -22,33 +22,30 @@ font:
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
 
-st.o: config/config.h st.h win.h
-x.o: arg.h config/config.h st.h win.h harfbuzz/hb.h
+st.o: config.h st.h win.h
+x.o: arg.h config.h st.h win.h harfbuzz/hb.h
 hb.o: st.h
-boxdraw.o: config/config.h st.h boxdraw/boxdraw_data.h
+boxdraw.o: config.h st.h boxdraw/boxdraw_data.h
 
-$(OBJ): config/config.h config/config.mk
+$(OBJ): config.h config.mk
 
 st: $(OBJ)
 	mv hb.o harfbuzz/hb.o
 	mv boxdraw.o boxdraw/boxdraw.o
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
-config-files:
-	sudo cp ./config/.Stdefaults ~
-
 clean:
 	rm -f st $(OBJ) st-$(VERSION).tar.gz *.rej *.orig *.o
 
 dist: clean
 	mkdir -p st-$(VERSION)
-	cp -R FAQ LEGACY TODO LICENSE Makefile README config/config.mk\
-		config/config.h st.info st.shortcuts arg.h st.h win.h $(SRC)\
+	cp -R FAQ LEGACY TODO LICENSE Makefile README config.mk\
+		config.h st.info st.shortcuts arg.h st.h win.h $(SRC)\
 		st-$(VERSION)
 	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
 	rm -rf st-$(VERSION)
 
-install: font st config-files
+install: font st
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	sudo cp -f st $(DESTDIR)$(PREFIX)/bin
 	sudo cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
@@ -65,7 +62,6 @@ uninstall:
 	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
 	sudo rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
 	sudo rm -f /usr/share/fonts/hack-nerd/hack-nerd-font.ttf
-	sudo rm -f ~/.Stdefaults
 	sudo rm -f /usr/share/icons/default/st.svg
 
 .PHONY: all options clean dist install uninstall
