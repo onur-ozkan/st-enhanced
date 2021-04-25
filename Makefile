@@ -16,8 +16,8 @@ options:
 	@echo "CC      = $(CC)"
 
 font:
-	sudo mkdir -p /usr/share/fonts/hack-nerd
-	sudo cp -f hack-nerd-font.ttf /usr/share/fonts/hack-nerd/
+	mkdir -p /usr/share/fonts/hack-nerd
+	cp -f hack-nerd-font.ttf /usr/share/fonts/hack-nerd/
 
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
@@ -47,21 +47,21 @@ dist: clean
 
 install: font st
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	sudo cp -f st $(DESTDIR)$(PREFIX)/bin
-	sudo cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
-	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st
-	sudo chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
-	sudo mkdir -p $(DESTDIR)$(MANPREFIX)/man1
-	sudo sh -c "sed "s/VERSION/$(VERSION)/g" < st.shortcuts > $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts"
-	sudo chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
+	cp -f st $(DESTDIR)$(PREFIX)/bin
+	cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/st
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
+	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
+	sh -c "sed "s/VERSION/$(VERSION)/g" < st.shortcuts > $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts"
+	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
 	tic -sx st.info
 	@echo Please see the README file regarding the terminfo entry of st.
 
 uninstall:
-	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st
-	sudo rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
-	sudo rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
-	sudo rm -f /usr/share/fonts/hack-nerd/hack-nerd-font.ttf
-	sudo rm -f /usr/share/icons/default/st.svg
+	rm -f $(DESTDIR)$(PREFIX)/bin/st
+	rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
+	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
+	rm -f /usr/share/fonts/hack-nerd/hack-nerd-font.ttf
+	rm -f /usr/share/icons/default/st.svg
 
 .PHONY: all options clean dist install uninstall
