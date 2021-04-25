@@ -21,15 +21,14 @@ Installation
 ------------
 Enter the following command to build and install st-enchanted:
 
-    make clean install
+    sudo make clean install
 
 
 Customization
 ------------
-In order to make your own configurations, edit the ~/.Stdefaults file and then enter the following command (reboot st after the command):
+In order to make your own configurations, copy .Stdefaults anywhere you want, and then edit the ~/.Stdefaults file and then enter the following command (reboot st after the command):
 
-    xrdb -merge ~/.Stdefaults
-
+    xrdb -merge .Stdefaults
 
 Shortcuts
 ------------
@@ -46,4 +45,4 @@ Uninstallation
 ------------
 Enter the following command to uninstall st-enchanted completely from the machine:
 
-    make clean uninstall
+    sudo make clean uninstall
