@@ -10,13 +10,6 @@ Requirements
 In order to build st-enchanted you need the Xlib header files.
 
 
-Patches
-------------
-- alpha
-- boxdraw
-- ligatures
-    
-
 Installation
 ------------
 Enter the following command to build and install st-enchanted:
