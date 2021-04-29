@@ -1,16 +1,16 @@
-st-enchanted - simple terminal enchanted
+st-enhanced - simple terminal enhanced
 --------------------
-st-enchanted is a customized version of st that makes using tmux and vim much better
+st-enhanced is a customized version of st that makes using tmux and vim much better
 
 
 Requirements
 ------------
-In order to build st-enchanted you need the Xlib header files.
+In order to build st-enhanced you need the Xlib header files.
 
 
 Installation
 ------------
-Enter the following command to build and install st-enchanted:
+Enter the following command to build and install st-enhanced:
 
     sudo make clean install
 
@@ -34,6 +34,6 @@ Besides the default shortcuts, you will have the followings also:
 
 Uninstallation
 ------------
-Enter the following command to uninstall st-enchanted completely from the machine:
+Enter the following command to uninstall st-enhanced completely from the machine:
 
     sudo make clean uninstall
