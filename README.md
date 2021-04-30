@@ -23,8 +23,19 @@ In order to make your own configurations, copy .Stdefaults anywhere you want, an
 
 Shortcuts
 ------------
+| command								    | role						                |
+| -											| -										    |
+| **alt + s**								| increase transparency			            |
+| **alt + a**								| decrease transparency		                |
+| **alt + shift + up-arrow**				| zoom in									|
+| **alt + shift + down-arrow**				| zoom out					                |
+| **alt + c**								| copy selected text			            |
+| **alt + v**								| paste copied text			                |
+
+
+Shortcuts
+------------
 Besides the default shortcuts, you will have the followings also:
-- `alt + s` = **increase transparency**
 - `alt + a` = **decrease transparency**
 - `alt + shift + up-arrow` = **zoom in**
 - `alt + shift + down-arrow` = **zoom out**
