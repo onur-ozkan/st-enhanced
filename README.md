@@ -39,3 +39,6 @@ Uninstallation
 Enter the following command to uninstall st-enhanced completely from the machine:
 
     sudo make clean uninstall
+
+
+Related article: https://onurozkan.dev/posts/reasons-that-i-left-gnome-and-kde
