@@ -4,7 +4,7 @@
 
 include config.mk
 
-SRC = st.c x.c boxdraw/boxdraw.c harfbuzz/hb.c
+SRC = st.c x.c boxdraw.c hb.c
 OBJ = $(SRC:.c=.o)
 
 all: options st
@@ -23,15 +23,13 @@ font:
 	$(CC) $(STCFLAGS) -c $<
 
 st.o: config.h st.h win.h
-x.o: arg.h config.h st.h win.h harfbuzz/hb.h
+x.o: arg.h config.h st.h win.h hb.h
 hb.o: st.h
-boxdraw.o: config.h st.h boxdraw/boxdraw_data.h
+boxdraw.o: config.h st.h boxdraw_data.h
 
 $(OBJ): config.h config.mk
 
 st: $(OBJ)
-	mv hb.o harfbuzz/hb.o
-	mv boxdraw.o boxdraw/boxdraw.o
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 clean:
