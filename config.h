@@ -128,8 +128,8 @@ static const char *colorname[] = {
 	"#eeeeee",
 	[255] = 0,
 	"#eeeeee", /* 256 -> cursor */
-	"#212121", /* 257 -> rev cursor*/
-	"#191919", /* 258 -> bg */
+	"#191919", /* 257 -> rev cursor*/
+	"#212121", /* 258 -> bg */
 	"#eeeeee", /* 259 -> fg */
 };
 
