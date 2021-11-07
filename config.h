@@ -103,7 +103,7 @@ char *termname = "st-256color";
  *
  *	stty tabs
  */
-unsigned int tabspaces = 8;
+unsigned int tabspaces = 4;
 
 /* bg opacity */
 float alpha = 1;
@@ -111,21 +111,21 @@ float alpha = 1;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	"#212121",
-	"#ab4642",
-	"#a1b56c",
+	"#992f33",
+	"#87af5f",
 	"#f7ca88",
-	"#7cafc2",
-	"#ba8baf",
-	"#86c1b9",
+	"#8197bf",
+	"#a293cb",
+	"#616161",
+	"#dddddd",
+	"#616161",
+	"#992f33",
+	"#87af5f",
+	"#f7ca88",
+	"#8197bf",
+	"#a293cb",
+	"#f7ca88",
 	"#eeeeee",
-	"#585858",
-	"#ab4642",
-	"#a1b56c",
-	"#f7ca88",
-	"#7cafc2",
-	"#ba8baf",
-	"#86c1b9",
-	"#f5f5f5",
 	[255] = 0,
 	"#eeeeee", /* 256 -> cursor */
 	"#555555", /* 257 -> rev cursor*/
