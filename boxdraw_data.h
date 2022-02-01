@@ -17,18 +17,18 @@
 /* Each shape is encoded as 16-bits. Higher bits are category, lower are data */
 /* Categories (mutually exclusive except BDB): */
 /* For convenience, BDL/BDA/BBS/BDB are 1 bit each, the rest are enums */
-#define BDL (1 << 8) /* Box Draw Lines (light/double/heavy) */
-#define BDA (1 << 9) /* Box Draw Arc (light) */
+#define BDL (1 << 8)			/* Box Draw Lines (light/double/heavy) */
+#define BDA (1 << 9)			/* Box Draw Arc (light) */
 
-#define BBD (1 << 10) /* Box Block Down (lower) X/8 */
-#define BBL (2 << 10) /* Box Block Left X/8 */
-#define BBU (3 << 10) /* Box Block Upper X/8 */
-#define BBR (4 << 10) /* Box Block Right X/8 */
-#define BBQ (5 << 10) /* Box Block Quadrants */
-#define BRL (6 << 10) /* Box Braille (data is lower byte of U28XX) */
+#define BBD (1 << 10)			/* Box Block Down (lower) X/8 */
+#define BBL (2 << 10)			/* Box Block Left X/8 */
+#define BBU (3 << 10)			/* Box Block Upper X/8 */
+#define BBR (4 << 10)			/* Box Block Right X/8 */
+#define BBQ (5 << 10)			/* Box Block Quadrants */
+#define BRL (6 << 10)			/* Box Braille (data is lower byte of U28XX) */
 
-#define BBS (1 << 14) /* Box Block Shades */
-#define BDB (1 << 15) /* Box Draw is Bold */
+#define BBS (1 << 14)			/* Box Block Shades */
+#define BDB (1 << 15)			/* Box Draw is Bold */
 
 /* (BDL/BDA) Light/Double/Heavy x Left/Up/Right/Down/Horizontal/Vertical      */
 /* Heavy is light+double (literally drawing light+double align to form heavy) */
@@ -62,21 +62,21 @@
 /* Data for U+2500 - U+259F except dashes/diagonals */
 static const unsigned short boxdata[256] = {
 	/* light lines */
-	[0x00] = BDL + LH,		/* light horizontal */
-	[0x02] = BDL + LV,		/* light vertical */
-	[0x0c] = BDL + LD + LR, /* light down and right */
-	[0x10] = BDL + LD + LL, /* light down and left */
-	[0x14] = BDL + LU + LR, /* light up and right */
-	[0x18] = BDL + LU + LL, /* light up and left */
-	[0x1c] = BDL + LV + LR, /* light vertical and right */
-	[0x24] = BDL + LV + LL, /* light vertical and left */
-	[0x2c] = BDL + LH + LD, /* light horizontal and down */
-	[0x34] = BDL + LH + LU, /* light horizontal and up */
-	[0x3c] = BDL + LV + LH, /* light vertical and horizontal */
-	[0x74] = BDL + LL,		/* light left */
-	[0x75] = BDL + LU,		/* light up */
-	[0x76] = BDL + LR,		/* light right */
-	[0x77] = BDL + LD,		/* light down */
+	[0x00] = BDL + LH,			/* light horizontal */
+	[0x02] = BDL + LV,			/* light vertical */
+	[0x0c] = BDL + LD + LR,		/* light down and right */
+	[0x10] = BDL + LD + LL,		/* light down and left */
+	[0x14] = BDL + LU + LR,		/* light up and right */
+	[0x18] = BDL + LU + LL,		/* light up and left */
+	[0x1c] = BDL + LV + LR,		/* light vertical and right */
+	[0x24] = BDL + LV + LL,		/* light vertical and left */
+	[0x2c] = BDL + LH + LD,		/* light horizontal and down */
+	[0x34] = BDL + LH + LU,		/* light horizontal and up */
+	[0x3c] = BDL + LV + LH,		/* light vertical and horizontal */
+	[0x74] = BDL + LL,			/* light left */
+	[0x75] = BDL + LU,			/* light up */
+	[0x76] = BDL + LR,			/* light right */
+	[0x77] = BDL + LD,			/* light down */
 
 	/* heavy [+light] lines */
 	[0x01] = BDL + HH,

@@ -127,10 +127,10 @@ static const char *colorname[] = {
 	"#f7ca88",
 	"#eeeeee",
 	[255] = 0,
-	"#eeeeee", /* 256 -> cursor */
-	"#191919", /* 257 -> rev cursor*/
-	"#212121", /* 258 -> bg */
-	"#eeeeee", /* 259 -> fg */
+	"#eeeeee",					/* 256 -> cursor */
+	"#191919",					/* 257 -> rev cursor */
+	"#212121",					/* 258 -> bg */
+	"#eeeeee",					/* 259 -> fg */
 };
 
 /*
@@ -220,7 +220,7 @@ ResourcePref resources[] = {
  * Beware that overloading Button1 will disable the selection.
  */
 static MouseShortcut mshortcuts[] = {
-	/* mask                 button   function        argument       release */
+	/* mask button function argument release */
 	{XK_ANY_MOD, Button2, selpaste, {.i = 0}, 1},
 	{ShiftMask, Button4, ttysend, {.s = "\033[5;2~"}},
 	{XK_ANY_MOD, Button4, ttysend, {.s = "\031"}},
@@ -232,10 +232,10 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (Mod1Mask | ShiftMask)
 
-static char *copyoutput[] = {"/bin/sh", "-c", "st-copyout", "externalpipe", NULL};
+static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
-	/* mask                 keysym          function        argument */
+	/* mask keysym function argument */
 	{XK_ANY_MOD, XK_Break, sendbreak, {.i = 0}},
 	{ControlMask, XK_Print, toggleprinter, {.i = 0}},
 	{ShiftMask, XK_Print, printscreen, {.i = 0}},
@@ -286,7 +286,7 @@ static Shortcut shortcuts[] = {
  * If you want keys other than the X11 function keys (0xFD00 - 0xFFFF)
  * to be mapped below, add them to this array.
  */
-static KeySym mappedkeys[] = {-1};
+static KeySym mappedkeys[] = { -1 };
 
 /*
  * State bits to ignore when matching key or button events.  By default,
@@ -299,7 +299,7 @@ static uint ignoremod = Mod2Mask | XK_SWITCH_MOD;
  * world. Please decide about changes wisely.
  */
 static Key key[] = {
-	/* keysym           mask            string      appkey appcursor */
+	/* keysym mask string appkey appcursor */
 	{XK_KP_Home, ShiftMask, "\033[2J", 0, -1},
 	{XK_KP_Home, ShiftMask, "\033[1;2H", 0, +1},
 	{XK_KP_Home, XK_ANY_MOD, "\033[H", 0, -1},
@@ -528,5 +528,4 @@ static uint selmasks[] = {
  */
 static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
-	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
-	"`abcdefghijklmnopqrstuvwxyz{|}~";
+	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_" "`abcdefghijklmnopqrstuvwxyz{|}~";
