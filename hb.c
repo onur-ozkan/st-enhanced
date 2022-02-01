@@ -7,8 +7,9 @@
 
 #include "st.h"
 
-void hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoints, int start, int length);
-hb_font_t *hbfindfont(XftFont *match);
+void hbtransformsegment(XftFont * xfont, const Glyph * string, hb_codepoint_t * codepoints,
+						int start, int length);
+hb_font_t *hbfindfont(XftFont * match);
 
 typedef struct
 {
@@ -35,8 +36,7 @@ void hbunloadfonts()
 	hbfontslen = 0;
 }
 
-hb_font_t *
-hbfindfont(XftFont *match)
+hb_font_t *hbfindfont(XftFont * match)
 {
 	for (int i = 0; i < hbfontslen; i++)
 	{
@@ -58,7 +58,7 @@ hbfindfont(XftFont *match)
 	return font;
 }
 
-void hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x, int y)
+void hbtransform(XftGlyphFontSpec * specs, const Glyph * glyphs, size_t len, int x, int y)
 {
 	int start = 0, length = 1, gstart = 0;
 	hb_codepoint_t *codepoints = calloc(len, sizeof(hb_codepoint_t));
@@ -71,7 +71,8 @@ void hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x
 			continue;
 		}
 
-		if (specs[specidx].font != specs[start].font || ATTRCMP(glyphs[gstart], glyphs[idx]) || selected(x + idx, y) != selected(x + gstart, y))
+		if (specs[specidx].font != specs[start].font || ATTRCMP(glyphs[gstart], glyphs[idx])
+			|| selected(x + idx, y) != selected(x + gstart, y))
 		{
 			hbtransformsegment(specs[start].font, glyphs, codepoints, gstart, length);
 
@@ -103,7 +104,7 @@ void hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x
 		}
 
 		if (codepoints[i] != specs[specidx].glyph)
-			((Glyph *)glyphs)[i].mode |= ATTR_LIGA;
+			((Glyph *) glyphs)[i].mode |= ATTR_LIGA;
 
 		specs[specidx++].glyph = codepoints[i];
 	}
@@ -111,7 +112,8 @@ void hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x
 	free(codepoints);
 }
 
-void hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoints, int start, int length)
+void hbtransformsegment(XftFont * xfont, const Glyph * string, hb_codepoint_t * codepoints,
+						int start, int length)
 {
 	hb_font_t *font = hbfindfont(xfont);
 	if (font == NULL)
