@@ -16,10 +16,6 @@ options:
 	@echo "LDFLAGS = $(STLDFLAGS)"
 	@echo "CC      = $(CC)"
 
-font:
-	mkdir -p /usr/share/fonts/hack-nerd
-	cp -f hack-nerd-font.ttf /usr/share/fonts/hack-nerd/
-
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
 
@@ -44,7 +40,7 @@ dist: clean
 	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
 	rm -rf st-$(VERSION)
 
-install: font st
+install: st
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f st $(DESTDIR)$(PREFIX)/bin
 	cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
@@ -60,7 +56,6 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
 	rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
-	rm -f /usr/share/fonts/hack-nerd/hack-nerd-font.ttf
 	rm -f /usr/share/icons/default/st.svg
 
 indent:
