@@ -20,8 +20,6 @@ Shortcuts
 ------------
 | command								    | role						                |
 | -											| -										    |
-| **alt + s**								| increase transparency			            |
-| **alt + a**								| decrease transparency		                |
 | **alt + shift + up-arrow**				| zoom in									|
 | **alt + shift + down-arrow**				| zoom out					                |
 | **alt + c**								| copy selected text			            |

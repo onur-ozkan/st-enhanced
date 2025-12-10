@@ -75,7 +75,6 @@ static void clipcopy(const Arg *);
 static void clippaste(const Arg *);
 static void numlock(const Arg *);
 static void selpaste(const Arg *);
-static void changealpha(const Arg *);
 static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
@@ -273,7 +272,6 @@ static char *usedfont = NULL;
 static double usedfontsize = 0;
 static double defaultfontsize = 0;
 
-static char *opt_alpha = NULL;
 static char *opt_class = NULL;
 static char **opt_cmd = NULL;
 static char *opt_embed = NULL;
@@ -316,19 +314,6 @@ void selpaste(const Arg * dummy)
 void numlock(const Arg * dummy)
 {
 	win.mode ^= MODE_NUMLOCK;
-}
-
-void changealpha(const Arg * arg)
-{
-	if ((alpha > 0 && arg->f < 0) || (alpha < 1 && arg->f > 0))
-		alpha += arg->f;
-	if (alpha < 0)
-		alpha = 0;
-	if (alpha > 1)
-		alpha = 1;
-
-	xloadcols();
-	redraw();
 }
 
 void zoom(const Arg * arg)
@@ -853,12 +838,6 @@ void xloadcols(void)
 				die("could not allocate color %d\n", i);
 		}
 
-	/* set alpha value of bg color */
-	if (opt_alpha)
-		alpha = strtof(opt_alpha, NULL);
-	dc.col[defaultbg].color.alpha = (unsigned short)(0xffff * alpha);
-	dc.col[defaultbg].pixel &= 0x00FFFFFF;
-	dc.col[defaultbg].pixel |= (unsigned char)(0xff * alpha) << 24;
 	loaded = 1;
 }
 
@@ -2185,9 +2164,6 @@ int main(int argc, char *argv[])
 	{
 case 'a':
 		allowaltscreen = 0;
-		break;
-case 'A':
-		opt_alpha = EARGF(usage());
 		break;
 case 'c':
 		opt_class = EARGF(usage());

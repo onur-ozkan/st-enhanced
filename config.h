@@ -105,9 +105,6 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 4;
 
-/* bg opacity */
-float alpha = 1;
-
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	"#191919",
@@ -212,7 +209,6 @@ ResourcePref resources[] = {
 	{"borderpx", INTEGER, &borderpx},
 	{"cwscale", FLOAT, &cwscale},
 	{"chscale", FLOAT, &chscale},
-	{"alpha", FLOAT, &alpha},
 };
 
 /*
@@ -250,8 +246,6 @@ static Shortcut shortcuts[] = {
 	{MODKEY, XK_v, clippaste, {.i = 0}},
 	{ShiftMask, XK_Insert, selpaste, {.i = 0}},
 	{TERMMOD, XK_Num_Lock, numlock, {.i = 0}},
-	{MODKEY, XK_s, changealpha, {.f = -0.05}},
-	{MODKEY, XK_a, changealpha, {.f = +0.05}},
 	{TERMMOD, XK_Up, zoom, {.f = +1}},
 	{TERMMOD, XK_Down, zoom, {.f = -1}},
 	{TERMMOD, XK_K, zoom, {.f = +1}},
