@@ -43,9 +43,7 @@ dist: clean
 install: st
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f st $(DESTDIR)$(PREFIX)/bin
-	cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/st
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
 	sh -c "sed "s/VERSION/$(VERSION)/g" < st.shortcuts > $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts"
 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
@@ -54,7 +52,6 @@ install: st
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
-	rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.shortcuts
 	rm -f /usr/share/icons/default/st.svg
 
@@ -76,4 +73,3 @@ check:
 	$(MAKE) check-indentation
 
 .PHONY: all options clean dist install uninstall indent check-indentation check
-

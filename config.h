@@ -228,8 +228,6 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (Mod1Mask | ShiftMask)
 
-static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
-
 static Shortcut shortcuts[] = {
 	/* mask keysym function argument */
 	{XK_ANY_MOD, XK_Break, sendbreak, {.i = 0}},
@@ -244,15 +242,9 @@ static Shortcut shortcuts[] = {
 	{MODKEY, XK_c, clipcopy, {.i = 0}},
 	{ShiftMask, XK_Insert, clippaste, {.i = 0}},
 	{MODKEY, XK_v, clippaste, {.i = 0}},
-	{ShiftMask, XK_Insert, selpaste, {.i = 0}},
 	{TERMMOD, XK_Num_Lock, numlock, {.i = 0}},
 	{TERMMOD, XK_Up, zoom, {.f = +1}},
 	{TERMMOD, XK_Down, zoom, {.f = -1}},
-	{TERMMOD, XK_K, zoom, {.f = +1}},
-	{TERMMOD, XK_J, zoom, {.f = -1}},
-	{TERMMOD, XK_U, zoom, {.f = +2}},
-	{TERMMOD, XK_D, zoom, {.f = -2}},
-	{MODKEY, XK_o, externalpipe, {.v = copyoutput}},
 };
 
 /*
