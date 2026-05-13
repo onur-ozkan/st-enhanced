@@ -207,6 +207,7 @@ static void propnotify(XEvent *);
 static void selnotify(XEvent *);
 static void selclear_(XEvent *);
 static void selrequest(XEvent *);
+static void setclip(char *, Time);
 static void setsel(char *, Time);
 static void mousesel(XEvent *, int);
 static void mousereport(XEvent *);
@@ -285,17 +286,18 @@ static int oldbutton = 3;		/* button event on startup: 3 = release */
 
 void clipcopy(const Arg * dummy)
 {
-	Atom clipboard;
+	char *sel;
 
-	free(xsel.clipboard);
-	xsel.clipboard = NULL;
+	sel = getsel();
+	if (sel != NULL)
+	{
+		setclip(sel, CurrentTime);
+		free(sel);
+		return;
+	}
 
 	if (xsel.primary != NULL)
-	{
-		xsel.clipboard = xstrdup(xsel.primary);
-		clipboard = XInternAtom(xw.dpy, "CLIPBOARD", 0);
-		XSetSelectionOwner(xw.dpy, clipboard, xw.win, CurrentTime);
-	}
+		setclip(xsel.primary, CurrentTime);
 }
 
 void clippaste(const Arg * dummy)
@@ -703,6 +705,25 @@ void selrequest(XEvent * e)
 		fprintf(stderr, "Error sending SelectionNotify event\n");
 }
 
+void setclip(char *str, Time t)
+{
+	Atom clipboard;
+
+	if (!str)
+		return;
+
+	free(xsel.clipboard);
+	xsel.clipboard = xstrdup(str);
+
+	clipboard = XInternAtom(xw.dpy, "CLIPBOARD", 0);
+	XSetSelectionOwner(xw.dpy, clipboard, xw.win, t);
+	if (XGetSelectionOwner(xw.dpy, clipboard) != xw.win)
+	{
+		free(xsel.clipboard);
+		xsel.clipboard = NULL;
+	}
+}
+
 void setsel(char *str, Time t)
 {
 	if (!str)
@@ -714,6 +735,8 @@ void setsel(char *str, Time t)
 	XSetSelectionOwner(xw.dpy, XA_PRIMARY, xw.win, t);
 	if (XGetSelectionOwner(xw.dpy, XA_PRIMARY) != xw.win)
 		selclear();
+	else
+		setclip(xsel.primary, t);
 }
 
 void xsetsel(char *str)
